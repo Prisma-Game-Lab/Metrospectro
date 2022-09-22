@@ -1,8 +1,5 @@
-using System;
-using System.Threading.Tasks;
 using TMPro;
 using Unity.Netcode;
-using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +28,7 @@ public class Menu : MonoBehaviour
         {
             Logger.Instance.LogInfo($"Jogador {id} acaba de conectar...");
         };
+        //NetworkManager.Singleton.OnClientDisconnectCallback += ;
     }
     
     public void LoadMainContainer()
