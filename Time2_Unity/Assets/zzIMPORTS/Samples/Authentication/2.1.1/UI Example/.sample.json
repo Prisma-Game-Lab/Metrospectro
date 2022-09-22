@@ -1,0 +1,5 @@
+{
+	"displayName": "UI Example",
+	"description": "Example scripts and UI elements demonstrating the Authentication package. This sample requires the com.unity.ugui package.",
+	"createSeparatePackage": false
+}

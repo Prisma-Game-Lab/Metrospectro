@@ -29,7 +29,8 @@ public class Logger : Singleton<Logger>
 
         if (enabled)
         {
-            debugAreaText.text += $"<color=\"white\">{DateTime.Now:HH:mm:ss.fff} {this.GetType().Name} enabled</color>\n";
+            debugAreaText.text += $"<color=\"white\">{DateTime.Now:HH:mm:ss.fff} " +
+                                  $"{this.GetType().Name} Ativado</color>\n";
         }
     }
 
