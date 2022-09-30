@@ -20,6 +20,8 @@ public class Logger : Singleton<Logger>
             debugAreaText = GetComponent<TextMeshProUGUI>();
         }
         debugAreaText.text = string.Empty;
+        
+        DontDestroyOnLoad(this);
     }
 
     private void OnEnable()

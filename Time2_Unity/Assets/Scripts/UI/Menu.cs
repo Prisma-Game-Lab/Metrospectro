@@ -73,17 +73,11 @@ public class Menu : MonoBehaviour
     
     private async void StartHost()
     {
-        if (RelayManager.IsRelayEnabled) 
-            await RelayManager.SetupRelay();
-
-        NetworkManager.Singleton.StartHost();
+        await GameNetPortal.Instance.StartHost();
     }
 
     private async void StartClient()
     {
-        if (RelayManager.IsRelayEnabled && !string.IsNullOrEmpty(joinCodeInput.text))
-                await RelayManager.JoinRelay(joinCodeInput.text);
-
-        NetworkManager.Singleton.StartClient();
+        await ClientGameNetPortal.Instance.StartClient(joinCodeInput.text);
     }
 }
