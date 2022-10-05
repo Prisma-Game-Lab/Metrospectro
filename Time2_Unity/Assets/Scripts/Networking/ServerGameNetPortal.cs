@@ -87,7 +87,7 @@ public class ServerGameNetPortal : MonoBehaviour
         NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 
-    public void EndRound()
+    public void EndGame()
     {
         gameInProgress = false;
 
