@@ -1,19 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ServerGameNetPortal : MonoBehaviour
+public class ServerGameNetPortal : Singleton<ServerGameNetPortal>
 {
     private int maxPlayers = 2;
-
-    public static ServerGameNetPortal Instance => instance;
-    private static ServerGameNetPortal instance;
-
+    
+    private readonly Dictionary<Role, PlayerData> _playerByRole = new();
     private Dictionary<string, PlayerData> clientData;
+    private Dictionary<Role, PlayerData> clientByRole;
     private Dictionary<ulong, string> clientIdToGuid;
     private Dictionary<ulong, int> clientSceneMap;
     private bool gameInProgress;
@@ -24,13 +24,6 @@ public class ServerGameNetPortal : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -42,9 +35,10 @@ public class ServerGameNetPortal : MonoBehaviour
         NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
         NetworkManager.Singleton.OnServerStarted += HandleServerStarted;
 
-        clientData = new Dictionary<string, PlayerData>();
-        clientIdToGuid = new Dictionary<ulong, string>();
-        clientSceneMap = new Dictionary<ulong, int>();
+        clientData = new();
+        clientByRole = new();
+        clientIdToGuid = new();
+        clientSceneMap = new();
     }
 
     private void OnDestroy()
@@ -59,6 +53,15 @@ public class ServerGameNetPortal : MonoBehaviour
         NetworkManager.Singleton.OnServerStarted -= HandleServerStarted;
     }
 
+    public PlayerData? GetPlayerByRole(Role role)
+    {
+        foreach (var playerData in clientData.Values)
+        {
+            if (playerData.PlayerRole == role) return playerData;
+        }
+        return null;
+    }
+
     public PlayerData? GetPlayerData(ulong clientId)
     {
         if (clientIdToGuid.TryGetValue(clientId, out string clientGuid))
@@ -69,12 +72,12 @@ public class ServerGameNetPortal : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"No player data found for client id: {clientId}");
+                Debug.LogWarning($"Nenhum jogador com o id: {clientId}");
             }
         }
         else
         {
-            Debug.LogWarning($"No client guid found for client id: {clientId}");
+            Debug.LogWarning($"Nenhum jogador com o id: {clientId}");
         }
 
         return null;

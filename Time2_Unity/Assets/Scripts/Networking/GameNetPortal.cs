@@ -5,11 +5,8 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameNetPortal : MonoBehaviour
+public class GameNetPortal : Singleton<GameNetPortal>
 {
-    public static GameNetPortal Instance => instance;
-    private static GameNetPortal instance;
-
     public event Action OnNetworkReadied;
 
     public event Action<ConnectStatus> OnConnectionFinished;
@@ -21,13 +18,6 @@ public class GameNetPortal : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        instance = this;
         DontDestroyOnLoad(gameObject);
     }
 

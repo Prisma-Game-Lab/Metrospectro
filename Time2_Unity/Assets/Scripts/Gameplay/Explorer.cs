@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Explorer : MonoBehaviour
+public class Explorer : NetworkBehaviour
 {
     [SerializeField] private float rotationDuration = .5f;
     [SerializeField] private float movementDuration = .5f;
@@ -18,9 +20,14 @@ public class Explorer : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
     }
 
+    private void Start()
+    {
+        if (IsOwner) RenderSettings.fog = true;
+    }
+
     public void HandleMovementInput(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
+        if (!context.performed || !IsOwner) return;
         
         var currentPosition = transform.position;
         
@@ -38,8 +45,8 @@ public class Explorer : MonoBehaviour
 
     public void HandleCameraInput(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
-
+        if (!context.performed || !IsOwner) return;
+    
         var inputValue = context.ReadValue<float>();
         
         if (!_lock.IsLocked())

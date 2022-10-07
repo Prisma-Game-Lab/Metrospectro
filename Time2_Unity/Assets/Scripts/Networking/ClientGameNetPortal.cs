@@ -6,11 +6,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(GameNetPortal))]
-public class ClientGameNetPortal : MonoBehaviour
+public class ClientGameNetPortal : Singleton<ClientGameNetPortal>
 {
-    public static ClientGameNetPortal Instance => instance;
-    private static ClientGameNetPortal instance;
-
     public DisconnectReason DisconnectReason { get; private set; } = new DisconnectReason();
 
     public event Action<ConnectStatus> OnConnectionFinished;
@@ -21,13 +18,6 @@ public class ClientGameNetPortal : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        instance = this;
         DontDestroyOnLoad(gameObject);
     }
 

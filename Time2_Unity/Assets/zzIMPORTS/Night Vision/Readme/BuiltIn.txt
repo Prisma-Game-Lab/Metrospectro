@@ -1,0 +1,3 @@
+Setup Guide(Built-In Render Pipeline):
+1)Delete URP folder
+2)Assign Nightvision component to your Camera

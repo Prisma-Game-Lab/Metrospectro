@@ -1,0 +1,4 @@
+Setup Guide(URP - Universal Render Pipeline):
+1)Locate Forward Renderer Data File (Edit -> Project Settings -> Graphics -> Universal Render Pipeline Asset -> Renderer List)
+2)Press Add Renderer Feature button
+3)Select Nightvision Feature
