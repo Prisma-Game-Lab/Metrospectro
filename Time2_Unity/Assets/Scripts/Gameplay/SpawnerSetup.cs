@@ -19,9 +19,11 @@ public class SpawnerSetup : NetworkBehaviour
         // Instantiate the GameObject Instance
         m_PrefabInstance = Instantiate(PrefabToSpawn);
 
+        var exp = ServerGameNetPortal.Instance.GetPlayerByRole(Role.Explorer);
+        if (!exp.HasValue) return;
         // Get the instance's NetworkObject and Spawn
         m_SpawnedNetworkObject = m_PrefabInstance.GetComponent<NetworkObject>();
-        m_SpawnedNetworkObject.Spawn();
+        m_SpawnedNetworkObject.SpawnWithOwnership(exp.Value.ClientId, destroyWithScene:true);
     }
 
     public override void OnNetworkDespawn()

@@ -20,8 +20,10 @@ public class Explorer : NetworkBehaviour
         _characterController = GetComponent<CharacterController>();
     }
 
-    private void Start()
+
+    public override void OnNetworkSpawn()
     {
+        base.OnNetworkSpawn();
         if (IsOwner) RenderSettings.fog = true;
     }
 
