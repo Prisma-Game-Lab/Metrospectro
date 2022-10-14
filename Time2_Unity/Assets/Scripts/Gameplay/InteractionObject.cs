@@ -1,34 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-
-
-public class InteractionObject : MonoBehaviour
+public abstract class InteractionObject : MonoBehaviour
 {
-    private enum State {Default,Interacted};
-    private State _currentState;
+    private bool _interacted;
     private Animator _animator;
+    private static readonly int Interacted = Animator.StringToHash("Interacted");
 
-    // Start is called before the first frame update
-    void Awake()
+    protected virtual void Awake()
     {
         _animator = GetComponent<Animator>();
-        _currentState = State.Default;
+        _interacted = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void OnInteract()
     {
+        if (AnimatorIsPlaying()) return;
         
-    }
-    public void OnInteract() 
-    {
-        if (_currentState == State.Default)
+        if (!_interacted)
         {
-            _animator.SetTrigger("Interacted");
+            _animator.SetBool(Interacted, true);
         }
+        else
+        {
+            _animator.SetBool(Interacted, false);
+        }
+    }
+
+    private bool AnimatorIsPlaying()
+    {
+        return _animator.GetCurrentAnimatorStateInfo(0).length >
+               _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
     }
 }
 
