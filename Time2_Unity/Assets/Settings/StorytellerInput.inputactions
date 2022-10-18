@@ -1,0 +1,34 @@
+{
+    "name": "StorytellerInput",
+    "maps": [
+        {
+            "name": "Storyteller",
+            "id": "13de2d09-1525-4da2-8797-9009dc6cac58",
+            "actions": [
+                {
+                    "name": "ChangeVision",
+                    "type": "Button",
+                    "id": "b67a70d2-275a-4e5a-89ab-963db1f26cff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8a7ca82d-5f95-4c41-a1af-540fe2772eaf",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeVision",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

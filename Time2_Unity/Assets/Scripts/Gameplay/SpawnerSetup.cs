@@ -1,37 +1,40 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SpawnerSetup : NetworkBehaviour
 {
-    public GameObject PrefabToSpawn;
-    public bool DestroyWithSpawner;        
-    private GameObject m_PrefabInstance;
-    private NetworkObject m_SpawnedNetworkObject;
+    [SerializeField] private GameObject explorerPrefab;
+    private NetworkObject _spawnedExplorer;
+    
+    [SerializeField] private GameObject storytellerPrefab;
+    private NetworkObject _spawnedStoryteller;
 
     public override void OnNetworkSpawn()
     {
-        // Only the server spawns, clients will disable this component on their side
-        enabled = IsServer;            
-        if (!enabled || PrefabToSpawn == null)
+        if (!IsServer || explorerPrefab == null || storytellerPrefab == null)
         {
             return;
         }
-        // Instantiate the GameObject Instance
-        m_PrefabInstance = Instantiate(PrefabToSpawn);
+        var explorerInstance = Instantiate(explorerPrefab);
+        var storytellerInstance = Instantiate(storytellerPrefab);
 
         var exp = ServerGameNetPortal.Instance.GetPlayerByRole(Role.Explorer);
-        if (!exp.HasValue) return;
-        // Get the instance's NetworkObject and Spawn
-        m_SpawnedNetworkObject = m_PrefabInstance.GetComponent<NetworkObject>();
-        m_SpawnedNetworkObject.SpawnWithOwnership(exp.Value.ClientId, destroyWithScene:true);
+        var str = ServerGameNetPortal.Instance.GetPlayerByRole(Role.StoryTeller);
+        if (!str.HasValue || !exp.HasValue) return;
+
+        _spawnedExplorer = explorerInstance.GetComponent<NetworkObject>();
+        _spawnedExplorer.SpawnWithOwnership(exp.Value.ClientId, destroyWithScene:true);
+        
+        _spawnedStoryteller = storytellerInstance.GetComponent<NetworkObject>();
+        _spawnedStoryteller.SpawnWithOwnership(str.Value.ClientId, destroyWithScene:true);
+
     }
 
     public override void OnNetworkDespawn()
     {
-        if (IsServer && DestroyWithSpawner && m_SpawnedNetworkObject != null && m_SpawnedNetworkObject.IsSpawned)
-        {
-            m_SpawnedNetworkObject.Despawn();
-        }
+        _spawnedStoryteller.Despawn();
+        _spawnedExplorer.Despawn();
         base.OnNetworkDespawn();
     }
 }
