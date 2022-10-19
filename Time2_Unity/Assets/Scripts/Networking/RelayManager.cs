@@ -12,14 +12,14 @@ public class RelayManager : MonoBehaviour
     [SerializeField] private const string Environment = "production";
     [SerializeField] private const int MaxNumberOfConnections = 2;
 
+    public static string RoomCode;
+
     public static bool IsRelayEnabled => Transport != null && Transport.Protocol == UnityTransport.ProtocolType.RelayUnityTransport;
 
     private static UnityTransport Transport => NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
 
     public static async Task<RelayHostData> SetupRelay()
     {
-        Logger.Instance.LogInfo($"Iniciando Servidor...");
-
         InitializationOptions options = new InitializationOptions()
             .SetEnvironmentName(Environment);
 
@@ -47,16 +47,15 @@ public class RelayManager : MonoBehaviour
         Transport.SetRelayServerData(relayHostData.IPv4Address, relayHostData.Port, relayHostData.AllocationIDBytes,
                 relayHostData.Key, relayHostData.ConnectionData);
 
-        Logger.Instance.LogInfo($"Servidor iniciado");
-        Logger.Instance.LogInfo($"Codigo da Sala: {relayHostData.JoinCode}");
+        RoomCode = relayHostData.JoinCode;
 
         return relayHostData;
     }
 
     public static async Task<RelayJoinData> JoinRelay(string joinCode)
     {
-        Logger.Instance.LogInfo($"Entrando na Sala {joinCode}...");
-
+        RoomCode = joinCode.ToUpper();
+        
         InitializationOptions options = new InitializationOptions()
             .SetEnvironmentName(Environment);
 
@@ -84,7 +83,7 @@ public class RelayManager : MonoBehaviour
         Transport.SetRelayServerData(relayJoinData.IPv4Address, relayJoinData.Port, relayJoinData.AllocationIDBytes,
             relayJoinData.Key, relayJoinData.ConnectionData, relayJoinData.HostConnectionData);
 
-        Logger.Instance.LogInfo($"Entrou na sala");
+        //Logger.Instance.LogInfo($"Entrou na sala");
 
         return relayJoinData;
     }

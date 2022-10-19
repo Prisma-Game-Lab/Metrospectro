@@ -26,7 +26,7 @@ public class Menu : MonoBehaviour
         
         NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
         {
-            Logger.Instance.LogInfo($"Jogador {id + 1} acaba de conectar...");
+            //Logger.Instance.LogInfo($"Jogador {id + 1} acaba de conectar...");
         };
         //NetworkManager.Singleton.OnClientDisconnectCallback += ;
     }

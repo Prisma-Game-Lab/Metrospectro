@@ -1,6 +1,5 @@
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class SpawnerSetup : NetworkBehaviour
 {
@@ -29,12 +28,5 @@ public class SpawnerSetup : NetworkBehaviour
         _spawnedStoryteller = storytellerInstance.GetComponent<NetworkObject>();
         _spawnedStoryteller.SpawnWithOwnership(str.Value.ClientId, destroyWithScene:true);
 
-    }
-
-    public override void OnNetworkDespawn()
-    {
-        _spawnedStoryteller.Despawn();
-        _spawnedExplorer.Despawn();
-        base.OnNetworkDespawn();
     }
 }

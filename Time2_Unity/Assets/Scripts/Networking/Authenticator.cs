@@ -8,7 +8,6 @@ public class Authenticator : MonoBehaviour
     public static async Task Authenticate()
     {
         await UnityServices.InitializeAsync();
-        Logger.Instance.LogInfo($"Unity Services {UnityServices.State}");
         await SignInAnonymouslyAsync();
     }
     private static async Task SignInAnonymouslyAsync()
@@ -16,7 +15,6 @@ public class Authenticator : MonoBehaviour
         try
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            Logger.Instance.LogInfo($"Sessao autenticada!\nPlayerID: {AuthenticationService.Instance.PlayerId}");
         }
         catch (AuthenticationException ex)
         {

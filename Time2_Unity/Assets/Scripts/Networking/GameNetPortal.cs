@@ -48,8 +48,10 @@ public class GameNetPortal : Singleton<GameNetPortal>
     
     public async Task StartHost()
     {
-        if (RelayManager.IsRelayEnabled) 
+        if (RelayManager.IsRelayEnabled)
+        {
             await RelayManager.SetupRelay();
+        }
         
         NetworkManager.Singleton.StartHost();
 

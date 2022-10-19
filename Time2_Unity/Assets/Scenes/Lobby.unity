@@ -131,10 +131,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 252672860, guid: f04855a6b3fae4f478846139aa5cf621, type: 3}
-      propertyPath: m_text
-      value: Iniciar Jogo
-      objectReference: {fileID: 0}
     - target: {fileID: 805378014, guid: f04855a6b3fae4f478846139aa5cf621, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -158,14 +154,6 @@ PrefabInstance:
     - target: {fileID: 805378014, guid: f04855a6b3fae4f478846139aa5cf621, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 914205286, guid: f04855a6b3fae4f478846139aa5cf621, type: 3}
-      propertyPath: m_text
-      value: Sair
-      objectReference: {fileID: 0}
-    - target: {fileID: 1063540717, guid: f04855a6b3fae4f478846139aa5cf621, type: 3}
-      propertyPath: m_text
-      value: Pronto
       objectReference: {fileID: 0}
     - target: {fileID: 1235158167, guid: f04855a6b3fae4f478846139aa5cf621, type: 3}
       propertyPath: m_AnchorMax.y

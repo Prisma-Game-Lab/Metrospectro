@@ -8,16 +8,25 @@ public class Explorer : NetworkBehaviour
 {
     [SerializeField] private float rotationDuration = .5f;
     [SerializeField] private float movementDuration = .5f;
+
+    [SerializeField] private int CurrentCellX;
+    [SerializeField] private int CurrentCellY;
     
     private readonly Lock _lock = new Lock();
     
-    private MazeSpawner _mazeSpawner;
+    private MapGrid _mapGrid;
     private CharacterController _characterController;
 
     private void Awake()
     {
-        _mazeSpawner = FindObjectOfType<MazeSpawner>();
+        _mapGrid = FindObjectOfType<MapGrid>();
         _characterController = GetComponent<CharacterController>();
+    }
+
+    private void Update()
+    {
+        CurrentCellX = (int)transform.position.x;
+        CurrentCellY = (int)transform.position.z;
     }
 
     public void HandleMovementInput(InputAction.CallbackContext context)
@@ -32,7 +41,7 @@ public class Explorer : NetworkBehaviour
         var targetX = Mathf.FloorToInt(currentPosition.x + moveDirection.x);
         var targetZ = Mathf.FloorToInt(currentPosition.z + moveDirection.y);
         
-        if (!_lock.IsLocked() && !_mazeSpawner.IsCellBlocked(targetX, targetZ))
+        if (!_lock.IsLocked() && !_mapGrid.IsCellBlocked(targetX, targetZ))
         {
             StartCoroutine(MovePlayer(moveDirection));
         }

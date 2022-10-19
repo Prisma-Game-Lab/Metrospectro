@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,12 +8,20 @@ public class LobbyUI : NetworkBehaviour
     [Header("References")]
     [SerializeField] private LobbyPlayerCard[] lobbyPlayerCards;
     [SerializeField] private Button startGameButton;
+    [SerializeField] private TextMeshProUGUI roomCodeTMP;
+
+    public string RoomCode
+    {
+        set => roomCodeTMP.text = $"{value}";
+    }
+    
 
     private NetworkList<LobbyPlayerState> _lobbyPlayers;
 
     private void Awake()
     {
         _lobbyPlayers = new NetworkList<LobbyPlayerState>();
+        RoomCode = RelayManager.RoomCode;
     }
 
     public override void OnNetworkSpawn()
