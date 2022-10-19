@@ -20,7 +20,7 @@ public class MapGrid : MonoBehaviour
         {
             for (int j = 0; j < gridHeight; j++)
             {
-                Collider[] results = new Collider[5];
+                var results = new Collider[5];
                 var amount = Physics.OverlapSphereNonAlloc(new Vector3(i+.5f, .5f, j+.5f), .4f, results);
                 if (amount != 0)
                 {
@@ -63,9 +63,6 @@ public class MapGrid : MonoBehaviour
                         case CellType.Empty:
                             DrawSquare(i,j,Color.white);
                             break;
-                        case CellType.Interactable:
-                            DrawSquare(i,j,Color.green);
-                            break;
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
@@ -87,4 +84,4 @@ public class MapGrid : MonoBehaviour
     }
 }
 
-public enum CellType { Empty, Blocked, Interactable }
+public enum CellType { Empty, Blocked }

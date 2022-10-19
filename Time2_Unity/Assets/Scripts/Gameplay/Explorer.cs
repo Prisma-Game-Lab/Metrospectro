@@ -6,27 +6,18 @@ using UnityEngine.InputSystem;
 
 public class Explorer : NetworkBehaviour
 {
-    [SerializeField] private float rotationDuration = .5f;
-    [SerializeField] private float movementDuration = .5f;
+    [SerializeField] private float rotationDuration = .25f;
+    [SerializeField] private float movementDuration = .35f;
 
-    [SerializeField] private int CurrentCellX;
-    [SerializeField] private int CurrentCellY;
-    
     private readonly Lock _lock = new Lock();
     
     private MapGrid _mapGrid;
     private CharacterController _characterController;
-
+    
     private void Awake()
     {
         _mapGrid = FindObjectOfType<MapGrid>();
         _characterController = GetComponent<CharacterController>();
-    }
-
-    private void Update()
-    {
-        CurrentCellX = (int)transform.position.x;
-        CurrentCellY = (int)transform.position.z;
     }
 
     public void HandleMovementInput(InputAction.CallbackContext context)
@@ -59,6 +50,40 @@ public class Explorer : NetworkBehaviour
         }
     }
 
+    public void HandleInteractionInput(InputAction.CallbackContext context)
+    {
+        if (!context.performed || !IsOwner) return;
+
+        var rayDirection = RotateVectorSnapped(new Vector2(0,1), (int) transform.eulerAngles.y);
+        
+        var currentPosition = transform.position;
+        currentPosition.y = 1.5f;
+
+        var targetX = Mathf.FloorToInt(currentPosition.x + rayDirection.x);
+        var targetZ = Mathf.FloorToInt(currentPosition.z + rayDirection.y);
+
+        var hits = new RaycastHit[5];
+        Physics.RaycastNonAlloc(currentPosition, Vector3.forward, hits, 2);
+        foreach (var hit in hits)
+        {
+            if (hit.collider == null) return;
+            var interactable = hit.collider.gameObject.GetComponent<Interactable>();
+            if (interactable == null) return;
+            Debug.Log("Found");
+            interactable.OnInteract();
+            break;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        
+        var currentPosition = transform.position;
+
+
+        Debug.DrawLine(currentPosition, Vector3.forward, Color.red);
+    }
+
     private IEnumerator RotateCamera(float angle)
     {
         _lock.AddLock();
@@ -88,9 +113,9 @@ public class Explorer : NetworkBehaviour
         float t = 0;
         while (t < 1f)
         {
+            yield return new WaitForFixedUpdate();
             t = Mathf.Min(1f, t + Time.deltaTime/movementDuration);
             _characterController.Move(targetDirection * Time.deltaTime/movementDuration);
-            yield return new WaitForFixedUpdate();
         }
         transform.position = finalPosition;
         
