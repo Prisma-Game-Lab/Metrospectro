@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
+
 public class SpawnerSetup : NetworkBehaviour
 {
     [SerializeField] private GameObject explorerPrefab;

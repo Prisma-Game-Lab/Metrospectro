@@ -1,7 +1,8 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 
-public class MapGrid : MonoBehaviour
+public class MapGrid : Singleton<MapGrid>
 {
     [SerializeField] private int gridWidth;
     [SerializeField] private int gridHeight;
@@ -14,17 +15,22 @@ public class MapGrid : MonoBehaviour
         UpdateGrid();
     }
 
-    private void UpdateGrid()
+    public void UpdateGrid()
     {
         for(int i = 0; i<gridWidth; i++)
         {
             for (int j = 0; j < gridHeight; j++)
             {
-                var results = new Collider[5];
-                var amount = Physics.OverlapSphereNonAlloc(new Vector3(i+.5f, .5f, j+.5f), .4f, results);
+                var results = new RaycastHit[5];
+                var amount = Physics.RaycastNonAlloc(new Vector3(i+.5f, -0.5f, j+.5f),Vector3.up, results, math.INFINITY);
                 if (amount != 0)
                 {
                     _grid[i, j] = CellType.Blocked;
+                }
+                else
+                {
+                    _grid[i, j] = CellType.Empty;
+
                 }
             }
         }

@@ -1,19 +1,25 @@
-﻿using Unity.Netcode;
+﻿using System;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Spawner : Interactable
+public class Spawner :  MonoBehaviour, IInteraction
 {
     [SerializeField] private GameObject prefabToSpawn;
-    private NetworkObject _spawnedExplorer;
-    protected override void Interact()
+    [SerializeField] private bool spawnLocally;
+    private GameObject _spawnedExplorer;
+    
+    public void Interact()
     {
-        var explorerInstance = Instantiate(prefabToSpawn);
-        _spawnedExplorer = explorerInstance.GetComponent<NetworkObject>();
-        _spawnedExplorer.Spawn();
+        _spawnedExplorer = Instantiate(prefabToSpawn);
+        if(!spawnLocally)
+            _spawnedExplorer.GetComponent<NetworkObject>().Spawn();
     }
 
-    protected override void ComeBack()
+    public void ComeBack()
     {
-        _spawnedExplorer.Despawn();
+        if(!spawnLocally)
+            _spawnedExplorer.GetComponent<NetworkObject>().Despawn();
+        else
+            Destroy(_spawnedExplorer);
     }
 }

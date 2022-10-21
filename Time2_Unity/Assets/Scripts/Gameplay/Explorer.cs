@@ -12,12 +12,10 @@ public class Explorer : NetworkBehaviour
     private readonly Lock _lock = new Lock();
     
     private MapGrid _mapGrid;
-    private CharacterController _characterController;
     
     private void Awake()
     {
         _mapGrid = FindObjectOfType<MapGrid>();
-        _characterController = GetComponent<CharacterController>();
     }
 
     public void HandleMovementInput(InputAction.CallbackContext context)
@@ -57,32 +55,23 @@ public class Explorer : NetworkBehaviour
         var rayDirection = RotateVectorSnapped(new Vector2(0,1), (int) transform.eulerAngles.y);
         
         var currentPosition = transform.position;
-        currentPosition.y = 1.5f;
-
-        var targetX = Mathf.FloorToInt(currentPosition.x + rayDirection.x);
-        var targetZ = Mathf.FloorToInt(currentPosition.z + rayDirection.y);
-
+        currentPosition.y = 1.4f;
+        var direction = new Vector3(rayDirection.x, 0, rayDirection.y);
+        
         var hits = new RaycastHit[5];
-        Physics.RaycastNonAlloc(currentPosition, Vector3.forward, hits, 2);
+        Physics.RaycastNonAlloc(currentPosition, direction, hits, 2);
         foreach (var hit in hits)
         {
-            if (hit.collider == null) return;
-            var interactable = hit.collider.gameObject.GetComponent<Interactable>();
-            if (interactable == null) return;
+            if (hit.collider == null) continue;
+            var interactable = hit.collider.gameObject.GetComponentInParent<Interactable>();
+            if (interactable == null) continue;
             Debug.Log("Found");
             interactable.OnInteract();
             break;
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        
-        var currentPosition = transform.position;
 
-
-        Debug.DrawLine(currentPosition, Vector3.forward, Color.red);
-    }
 
     private IEnumerator RotateCamera(float angle)
     {
@@ -94,10 +83,7 @@ public class Explorer : NetworkBehaviour
         {
             t = Mathf.Min(1f, t + Time.deltaTime/rotationDuration);
             Vector3 newEulerOffset = Vector3.up * (angle * t);      
-            // global z rotation
             transform.rotation = Quaternion.Euler(newEulerOffset) * startRotation;
-            // local z rotation
-            // transform.rotation = startRotation * Quaternion.Euler(newEulerOffset);
             yield return null;
         } 
         _lock.RemoveLock();
@@ -113,9 +99,9 @@ public class Explorer : NetworkBehaviour
         float t = 0;
         while (t < 1f)
         {
-            yield return new WaitForFixedUpdate();
+            yield return null;
             t = Mathf.Min(1f, t + Time.deltaTime/movementDuration);
-            _characterController.Move(targetDirection * Time.deltaTime/movementDuration);
+            transform.position += targetDirection * Time.deltaTime/movementDuration;
         }
         transform.position = finalPosition;
         
