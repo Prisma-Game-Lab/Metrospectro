@@ -16,11 +16,17 @@ public class Interactable : NetworkBehaviour
 
     public void OnInteract()
     { 
-        HandleInteractionClientRpc();
+        HandleInteractionServerRPC();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void HandleInteractionServerRPC()
+    {
+        HandleInteractionClientRPC();
     }
 
     [ClientRpc]
-    private void HandleInteractionClientRpc()
+    private void HandleInteractionClientRPC()
     {
         
         if (!_interacted)

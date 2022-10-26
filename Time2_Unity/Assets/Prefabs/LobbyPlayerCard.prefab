@@ -381,8 +381,11 @@ MonoBehaviour:
   waitingForPlayerPanel: {fileID: 5393570124108907800}
   playerDataPanel: {fileID: 4118428114958079449}
   playerDisplayNameText: {fileID: 3891271221708712985}
-  selectedCharacterImage: {fileID: 7312721459122679306}
+  roleImage: {fileID: 7312721459122679306}
   isReadyToggle: {fileID: 7093129836083058353}
+  images:
+  - {fileID: 21300000, guid: 9b0a4cadf9f2a854db8328d8511364ce, type: 3}
+  - {fileID: 21300000, guid: e9c0a36deffe56b45be7b9505e4203c6, type: 3}
 --- !u!1 &4905470916900570236
 GameObject:
   m_ObjectHideFlags: 0

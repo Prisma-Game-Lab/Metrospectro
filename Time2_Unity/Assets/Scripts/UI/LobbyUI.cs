@@ -8,6 +8,7 @@ public class LobbyUI : NetworkBehaviour
     [Header("References")]
     [SerializeField] private LobbyPlayerCard[] lobbyPlayerCards;
     [SerializeField] private Button startGameButton;
+    [SerializeField] private Button changeRolesButton;
     [SerializeField] private TextMeshProUGUI roomCodeTMP;
 
     public string RoomCode
@@ -34,6 +35,7 @@ public class LobbyUI : NetworkBehaviour
         if (IsServer)
         {
             startGameButton.gameObject.SetActive(true);
+            changeRolesButton.gameObject.SetActive(true);
 
             NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnected;
             NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
@@ -80,11 +82,11 @@ public class LobbyUI : NetworkBehaviour
     {
         var playerData = ServerGameNetPortal.Instance.GetPlayerData(clientId);
 
-        if (!playerData.HasValue) { return; }
 
         _lobbyPlayers.Add(new LobbyPlayerState(
             clientId,
-            $"Jogador {playerData.Value.ClientId + 1}",
+            $"Jogador {playerData.ClientId + 1}",
+            playerData.PlayerRole,
             false
         ));
     }
@@ -111,6 +113,7 @@ public class LobbyUI : NetworkBehaviour
                 _lobbyPlayers[i] = new LobbyPlayerState(
                     _lobbyPlayers[i].ClientId,
                     _lobbyPlayers[i].PlayerName,
+                    _lobbyPlayers[i].PlayerRole,
                     !_lobbyPlayers[i].IsReady
                 );
             }
@@ -126,6 +129,22 @@ public class LobbyUI : NetworkBehaviour
 
         ServerGameNetPortal.Instance.StartGame();
     }
+    
+    [ServerRpc(RequireOwnership = false)]
+    private void ChangeRolesServerRpc(ServerRpcParams serverRpcParams = default)
+    {
+        for (int i = 0; i < _lobbyPlayers.Count; i++)
+        {
+            var role = _lobbyPlayers[i].PlayerRole == Role.Explorer ? Role.StoryTeller : Role.Explorer;
+            ServerGameNetPortal.Instance.SetRole(_lobbyPlayers[i].ClientId, role);
+            _lobbyPlayers[i] = new LobbyPlayerState(
+                    _lobbyPlayers[i].ClientId,
+                    _lobbyPlayers[i].PlayerName,
+                    role,
+                    _lobbyPlayers[i].IsReady
+                );
+        }
+    }
 
     public void OnLeaveClicked()
     {
@@ -136,12 +155,17 @@ public class LobbyUI : NetworkBehaviour
     {
         ToggleReadyServerRpc();
     }
+    
+    public void OnChageRolesClicked()
+    {
+        ChangeRolesServerRpc();
+    }
 
     public void OnStartGameClicked()
     {
         StartGameServerRpc();
     }
-
+    
     private void HandleLobbyPlayersStateChanged(NetworkListEvent<LobbyPlayerState> lobbyState)
     {
         for (int i = 0; i < lobbyPlayerCards.Length; i++)
@@ -159,6 +183,7 @@ public class LobbyUI : NetworkBehaviour
         if(IsHost)
         {
             startGameButton.interactable = IsEveryoneReady();
+            changeRolesButton.interactable = IsEveryoneReady();
         }
     }
 }

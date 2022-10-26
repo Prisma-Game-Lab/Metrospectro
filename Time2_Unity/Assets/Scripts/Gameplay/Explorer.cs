@@ -10,32 +10,42 @@ public class Explorer : NetworkBehaviour
     [SerializeField] private float movementDuration = .35f;
 
     private readonly Lock _lock = new Lock();
-    
-    private MapGrid _mapGrid;
-    
-    private void Awake()
-    {
-        _mapGrid = FindObjectOfType<MapGrid>();
-    }
+
+    //private NetworkVariable<Vector2> _moveDirection;
+    //private NetworkVariable<float> _rotateAngle;
 
     public void HandleMovementInput(InputAction.CallbackContext context)
     {
-        if (!context.performed || !IsOwner) return;
+        if (!IsOwner || !context.performed) return;
         
         var currentPosition = transform.position;
         
         var inputValue = context.ReadValue<Vector2>();
-        var moveDirection = RotateVectorSnapped(inputValue, (int) transform.eulerAngles.y);
+        if (inputValue.x != 0) inputValue.y = 0;
+        
+        var moveDirection = inputValue.RotateVectorSnapped((int) transform.eulerAngles.y);
         
         var targetX = Mathf.FloorToInt(currentPosition.x + moveDirection.x);
         var targetZ = Mathf.FloorToInt(currentPosition.z + moveDirection.y);
         
-        if (!_lock.IsLocked() && !_mapGrid.IsCellBlocked(targetX, targetZ))
+        if (!_lock.IsLocked() && !MapGrid.Instance.IsCellBlocked(targetX, targetZ))
         {
-            StartCoroutine(MovePlayer(moveDirection));
+            MovePlayerServerRPC(moveDirection.x, moveDirection.y);
         }
     }
 
+    [ServerRpc]
+    private void MovePlayerServerRPC(float x, float y)
+    {
+        MovePlayerClientRPC(x, y);
+    }
+    
+    [ClientRpc]
+    private void MovePlayerClientRPC(float x, float y)
+    {
+        StartCoroutine(MovePlayer(x, y));
+    }
+    
     public void HandleCameraInput(InputAction.CallbackContext context)
     {
         if (!context.performed || !IsOwner) return;
@@ -44,15 +54,27 @@ public class Explorer : NetworkBehaviour
         
         if (!_lock.IsLocked())
         {
-            StartCoroutine(RotateCamera(Mathf.FloorToInt(inputValue)));
+            RotateCameraServerRPC(inputValue);
         }
+    }
+    
+    [ServerRpc]
+    private void RotateCameraServerRPC(float angle)
+    {
+        RotateCameraClientRPC(angle);
+    }
+    
+    [ClientRpc]
+    private void RotateCameraClientRPC(float angle)
+    {
+        StartCoroutine(RotateCamera(Mathf.FloorToInt(angle)));
     }
 
     public void HandleInteractionInput(InputAction.CallbackContext context)
     {
         if (!context.performed || !IsOwner) return;
 
-        var rayDirection = RotateVectorSnapped(new Vector2(0,1), (int) transform.eulerAngles.y);
+        var rayDirection = new Vector2(0,1).RotateVectorSnapped((int) transform.eulerAngles.y);
         
         var currentPosition = transform.position;
         currentPosition.y = 1.4f;
@@ -71,8 +93,6 @@ public class Explorer : NetworkBehaviour
         }
     }
 
-
-
     private IEnumerator RotateCamera(float angle)
     {
         _lock.AddLock();
@@ -89,11 +109,11 @@ public class Explorer : NetworkBehaviour
         _lock.RemoveLock();
     }
 
-    private IEnumerator MovePlayer(Vector2 vec)
+    private IEnumerator MovePlayer(float x, float y)
     {
         _lock.AddLock();
 
-        var targetDirection = new Vector3(vec.x,0, vec.y);
+        var targetDirection = new Vector3(x,0, y);
         var finalPosition = targetDirection + transform.position;
 
         float t = 0;
@@ -106,42 +126,5 @@ public class Explorer : NetworkBehaviour
         transform.position = finalPosition;
         
         _lock.RemoveLock();
-    }
-
-    private Vector2 RotateVectorSnapped(Vector2 vec,int angle)
-    {
-        switch (angle)
-        {
-            case 90:
-                return RotateToRight(vec);
-            case -90: case 270:
-                return RotateToLeft(vec);
-            case 180: case -180:
-                return Rotate180(vec);
-            default:
-                return vec;
-        }
-    }
-
-    private Vector2 RotateToLeft(Vector2 vec) {
-
-        return new Vector2(vec.y * -1.0f, vec.x).normalized;
-
-    }
-
-    private Vector2 RotateToRight(Vector2 vec) {
-
-        return new Vector2(vec.y, vec.x * -1.0f).normalized;
-
-    }
-
-    private Vector2 Rotate180(Vector2 vec) {
-
-        vec = new Vector2(vec.y, vec.x * -1);
-
-        vec = new Vector2(vec.y, vec.x * -1);
-
-        return vec;
-
     }
 }

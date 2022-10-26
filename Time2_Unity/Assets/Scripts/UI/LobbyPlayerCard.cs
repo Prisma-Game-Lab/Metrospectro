@@ -10,14 +10,16 @@ public class LobbyPlayerCard : MonoBehaviour
 
     [Header("Data Display")]
     [SerializeField] private TMP_Text playerDisplayNameText;
-    [SerializeField] private Image selectedCharacterImage;
+    [SerializeField] private Image roleImage;
     [SerializeField] private Toggle isReadyToggle;
+
+     [SerializeField] private Sprite[] images;
 
     public void UpdateDisplay(LobbyPlayerState lobbyPlayerState)
     {
         playerDisplayNameText.text = lobbyPlayerState.PlayerName.ToString();
         isReadyToggle.isOn = lobbyPlayerState.IsReady;
-        
+
         waitingForPlayerPanel.SetActive(false);
         playerDataPanel.SetActive(true);
     }

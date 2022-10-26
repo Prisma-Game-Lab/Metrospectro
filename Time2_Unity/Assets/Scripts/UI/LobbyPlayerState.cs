@@ -6,12 +6,14 @@ public struct LobbyPlayerState : INetworkSerializable, IEquatable<LobbyPlayerSta
 {
     public ulong ClientId;
     public FixedString32Bytes PlayerName;
+    public Role PlayerRole;
     public bool IsReady;
 
-    public LobbyPlayerState(ulong clientId, FixedString32Bytes playerName, bool isReady)
+    public LobbyPlayerState(ulong clientId, FixedString32Bytes playerName,Role playerRole, bool isReady)
     {
         ClientId = clientId;
         PlayerName = playerName;
+        PlayerRole = playerRole;
         IsReady = isReady;
     }
 
