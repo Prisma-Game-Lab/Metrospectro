@@ -69,7 +69,7 @@ public class Storyteller : NetworkBehaviour
     
     private void OnChangeTime(float currentPercentage)
     {
-        var current = Mathf.FloorToInt(currentPercentage / 20);
+        var current = Mathf.FloorToInt(currentPercentage * 5);
         batteryImage.sprite = batterySprites[current];
     }
 }
