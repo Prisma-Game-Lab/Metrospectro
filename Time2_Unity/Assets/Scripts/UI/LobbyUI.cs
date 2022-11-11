@@ -45,6 +45,9 @@ public class LobbyUI : NetworkBehaviour
                 HandleClientConnected(client.ClientId);
             }
         }
+
+        lobbyPlayerCards[0].SetRoleImage(0);
+        lobbyPlayerCards[1].SetRoleImage(1);
     }
 
     public override void OnDestroy()
@@ -133,6 +136,7 @@ public class LobbyUI : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void ChangeRolesServerRpc(ServerRpcParams serverRpcParams = default)
     {
+        SwitchRoleImagesClientRPC();
         for (int i = 0; i < _lobbyPlayers.Count; i++)
         {
             var role = _lobbyPlayers[i].PlayerRole == Role.Explorer ? Role.StoryTeller : Role.Explorer;
@@ -161,6 +165,16 @@ public class LobbyUI : NetworkBehaviour
         ChangeRolesServerRpc();
     }
 
+    [ClientRpc]
+    public void SwitchRoleImagesClientRPC(ClientRpcParams clientRpcParams = default)
+    {
+        foreach (var card in lobbyPlayerCards)
+        {
+            card.SwitchRoleImage();
+        }
+    }
+
+
     public void OnStartGameClicked()
     {
         StartGameServerRpc();
@@ -183,7 +197,8 @@ public class LobbyUI : NetworkBehaviour
         if(IsHost)
         {
             startGameButton.interactable = IsEveryoneReady();
-            changeRolesButton.interactable = IsEveryoneReady();
+            changeRolesButton.interactable = _lobbyPlayers.Count == 2;
+            
         }
     }
 }

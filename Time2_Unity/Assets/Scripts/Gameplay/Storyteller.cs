@@ -1,15 +1,14 @@
 ﻿using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Battery))]
 public class Storyteller : NetworkBehaviour
 {
-    [SerializeField] private GameObject lights;
-
     private readonly Lock _lock = new Lock();
+
+    [SerializeField] private GameObject lights;
 
     private Battery _battery;
     [SerializeField] private GameObject mapCanvas;
@@ -24,6 +23,7 @@ public class Storyteller : NetworkBehaviour
         {
             mapCanvas.gameObject.SetActive(false);
             batteryCanvas.gameObject.SetActive(false);
+            lights.SetActive(false);
         }
         else
         {

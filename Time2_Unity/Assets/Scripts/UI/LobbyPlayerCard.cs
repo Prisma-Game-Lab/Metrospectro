@@ -10,7 +10,7 @@ public class LobbyPlayerCard : MonoBehaviour
 
     [Header("Data Display")]
     [SerializeField] private TMP_Text playerDisplayNameText;
-    [SerializeField] private Image roleImage;
+    [SerializeField] public Image roleImage;
     [SerializeField] private Toggle isReadyToggle;
 
      [SerializeField] private Sprite[] images;
@@ -28,6 +28,16 @@ public class LobbyPlayerCard : MonoBehaviour
     {
         waitingForPlayerPanel.SetActive(true);
         playerDataPanel.SetActive(false);
+    }
+
+    public void SwitchRoleImage()
+    {
+        roleImage.sprite = roleImage.sprite == images[0] ? images[1] : images[0];
+    }
+
+    public void SetRoleImage(int image)
+    {
+        roleImage.sprite = images[image];
     }
 }
 
