@@ -12,16 +12,18 @@ public class Storyteller : NetworkBehaviour
     private readonly Lock _lock = new Lock();
 
     private Battery _battery;
-    [SerializeField] private Image mapImage;
+    [SerializeField] private GameObject mapCanvas;
+    [SerializeField] private GameObject batteryCanvas;
     [SerializeField] private Image batteryImage;
+    [SerializeField] private Sprite[] batterySprites;
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
         if (!IsOwner)
         {
-            mapImage.gameObject.SetActive(false);
-            batteryImage.gameObject.SetActive(false);
+            mapCanvas.gameObject.SetActive(false);
+            batteryCanvas.gameObject.SetActive(false);
         }
         else
         {
@@ -32,17 +34,17 @@ public class Storyteller : NetworkBehaviour
     private void Awake()
     {
         _battery = GetComponent<Battery>();
-        batteryImage.enabled = false;
-        mapImage.enabled = true;
+        batteryCanvas.SetActive(false);
+        mapCanvas.SetActive(true);
     }
 
     public void HandleInput(InputAction.CallbackContext context)
     {
         if (!context.performed || !IsOwner || _lock.IsLocked()) return;
 
-        var isMapEnabled = mapImage.enabled;
-        mapImage.enabled = !isMapEnabled;
-        batteryImage.enabled = isMapEnabled;
+        var isMapEnabled = mapCanvas.activeSelf;
+        mapCanvas.SetActive(!isMapEnabled);
+        batteryCanvas.SetActive(isMapEnabled);
         _battery.SwitchPower();
 
     }
@@ -62,11 +64,12 @@ public class Storyteller : NetworkBehaviour
     private void OnEndTime()
     {
         _lock.AddLock();
-        mapImage.enabled = true;
+        mapCanvas.SetActive(true);
     }
     
     private void OnChangeTime(float currentPercentage)
     {
-        batteryImage.fillAmount = currentPercentage;
+        var current = Mathf.FloorToInt(currentPercentage / 20);
+        batteryImage.sprite = batterySprites[current];
     }
 }
