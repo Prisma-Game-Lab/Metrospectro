@@ -16,10 +16,7 @@ public class PauseMenu : NetworkBehaviour
 
         foreach (var input in inputs)
         {
-            Debug.Log(1);
             if (input.currentActionMap.name == "PauseMenu") continue;
-            Debug.Log(2);
-            
             _actionMaps.Add(input.currentActionMap);
         }
 

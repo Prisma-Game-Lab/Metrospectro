@@ -6,6 +6,7 @@ public class MapGrid : Singleton<MapGrid>
 {
     [SerializeField] private int gridWidth;
     [SerializeField] private int gridHeight;
+    [SerializeField] private LayerMask blockMask;
 
     private CellType[,] _grid;
     
@@ -22,7 +23,8 @@ public class MapGrid : Singleton<MapGrid>
             for (int j = 0; j < gridHeight; j++)
             {
                 var results = new RaycastHit[5];
-                var amount = Physics.RaycastNonAlloc(new Vector3(i+.5f, -0.5f, j+.5f),Vector3.up, results, math.INFINITY);
+                var amount = Physics.RaycastNonAlloc(new Vector3(i+.5f, -0.5f, j+.5f), Vector3.up,
+                                                        results, math.INFINITY, blockMask);
                 if (amount != 0)
                 {
                     _grid[i, j] = CellType.Blocked;

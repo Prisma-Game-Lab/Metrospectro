@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7242303424417600124}
   - component: {fileID: 7242303424417600123}
   - component: {fileID: 7242303424417600122}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ExplorerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,8 @@ GameObject:
   - component: {fileID: 7242303424663526310}
   - component: {fileID: 7242303424663526311}
   - component: {fileID: 7242303424663526297}
-  m_Layer: 0
+  - component: {fileID: -6029937970818143946}
+  m_Layer: 6
   m_Name: Explorer
   m_TagString: Explorer
   m_Icon: {fileID: 0}
@@ -218,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff30509a1a018854abb500a27c8271ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invertedInput: 0
   rotationDuration: 0.25
   movementDuration: 0.35
 --- !u!114 &7242303424663526311
@@ -315,6 +317,20 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!136 &-6029937970818143946
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7242303424663526305}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8959927682704430798
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +342,7 @@ GameObject:
   - component: {fileID: 1039089005116050076}
   - component: {fileID: 7162686746007153697}
   - component: {fileID: 4759353031268746730}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

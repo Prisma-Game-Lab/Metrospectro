@@ -1,14 +1,21 @@
+using System;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.Netcode;
 using UnityEngine;
 
 public class EnemyOne : MonoBehaviour
 {
+    private SpawnerSetup _spawner;
+
     private void Awake()
     {
-        var storyTeller = ServerGameNetPortal.Instance.GetPlayerByRole(Role.StoryTeller);
-        if (!storyTeller.HasValue) return;
-        if (storyTeller.Value.ClientId == NetworkManager.Singleton.LocalClientId)
+        _spawner = FindObjectOfType<SpawnerSetup>();
+    }
+
+    private void SetUp()
+    {
+        var isExp = FindObjectOfType<Explorer>().IsOwner;
+        if (!isExp)
         {
             var r = GetComponent<Renderer>();
 
@@ -17,5 +24,15 @@ public class EnemyOne : MonoBehaviour
                 r.enabled = false;
             }
         }
+    }
+
+    private void OnEnable()
+    {
+        _spawner.OnExplorerSpawn += SetUp;
+    }
+    
+    private void OnDisable()
+    {
+        _spawner.OnExplorerSpawn -= SetUp;
     }
 }

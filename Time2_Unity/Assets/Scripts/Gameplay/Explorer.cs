@@ -6,24 +6,30 @@ using UnityEngine.InputSystem;
 
 public class Explorer : NetworkBehaviour
 {
+    public bool invertedInput;
+
     [SerializeField] private float rotationDuration = .25f;
     [SerializeField] private float movementDuration = .35f;
-
+    
     private readonly Lock _lock = new Lock();
-
-    //private NetworkVariable<Vector2> _moveDirection;
-    //private NetworkVariable<float> _rotateAngle;
-
+    
     public void HandleMovementInput(InputAction.CallbackContext context)
     {
         if (!IsOwner || !context.performed) return;
         
         var currentPosition = transform.position;
+
+        
         
         var inputValue = context.ReadValue<Vector2>();
         if (inputValue.x != 0) inputValue.y = 0;
         
         var moveDirection = inputValue.RotateVectorSnapped((int) transform.eulerAngles.y);
+        
+        if (invertedInput)
+        {
+            moveDirection = new Vector2(-1 * moveDirection.x, -1 * moveDirection.y);
+        }
         
         var targetX = Mathf.FloorToInt(currentPosition.x + moveDirection.x);
         var targetZ = Mathf.FloorToInt(currentPosition.z + moveDirection.y);
@@ -51,6 +57,11 @@ public class Explorer : NetworkBehaviour
         if (!context.performed || !IsOwner) return;
     
         var inputValue = context.ReadValue<float>();
+        
+        if (invertedInput)
+        {
+            inputValue = -1 * inputValue;
+        }
         
         if (!_lock.IsLocked())
         {

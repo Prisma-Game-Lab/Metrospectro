@@ -9,25 +9,31 @@ public class SpawnerSetup : NetworkBehaviour
     
     [SerializeField] private GameObject storytellerPrefab;
     private NetworkObject _spawnedStoryteller;
+    
+    public delegate void NotifyExpSpawn();
+    public event NotifyExpSpawn OnExplorerSpawn;
+    
+    public delegate void NotifyStoSpawn();
+    public event NotifyStoSpawn OnStorytellerSpawn;
 
     public override void OnNetworkSpawn()
     {
-        if (!IsServer || explorerPrefab == null || storytellerPrefab == null)
+        if (IsServer && explorerPrefab != null && storytellerPrefab != null)
         {
-            return;
+            var explorerInstance = Instantiate(explorerPrefab);
+            var storytellerInstance = Instantiate(storytellerPrefab);
+
+            var exp = ServerGameNetPortal.Instance.GetPlayerByRole(Role.Explorer);
+            var str = ServerGameNetPortal.Instance.GetPlayerByRole(Role.StoryTeller);
+            if (!str.HasValue || !exp.HasValue) return;
+
+            _spawnedExplorer = explorerInstance.GetComponent<NetworkObject>();
+            _spawnedExplorer.SpawnWithOwnership(exp.Value.ClientId, destroyWithScene: true);
+
+            _spawnedStoryteller = storytellerInstance.GetComponent<NetworkObject>();
+            _spawnedStoryteller.SpawnWithOwnership(str.Value.ClientId, destroyWithScene: true);
         }
-        var explorerInstance = Instantiate(explorerPrefab);
-        var storytellerInstance = Instantiate(storytellerPrefab);
-
-        var exp = ServerGameNetPortal.Instance.GetPlayerByRole(Role.Explorer);
-        var str = ServerGameNetPortal.Instance.GetPlayerByRole(Role.StoryTeller);
-        if (!str.HasValue || !exp.HasValue) return;
-
-        _spawnedExplorer = explorerInstance.GetComponent<NetworkObject>();
-        _spawnedExplorer.SpawnWithOwnership(exp.Value.ClientId, destroyWithScene:true);
-        
-        _spawnedStoryteller = storytellerInstance.GetComponent<NetworkObject>();
-        _spawnedStoryteller.SpawnWithOwnership(str.Value.ClientId, destroyWithScene:true);
-
+        OnExplorerSpawn?.Invoke();
+        OnStorytellerSpawn?.Invoke();
     }
 }
