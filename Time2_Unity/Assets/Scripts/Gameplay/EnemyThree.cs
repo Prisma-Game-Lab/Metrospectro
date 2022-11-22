@@ -19,7 +19,6 @@ public class EnemyThree : MonoBehaviour
         await Task.Delay(5000);
         SetInvertedInputs(false);
         Debug.Log("Normal");
-        
     }
 
     private void SetInvertedInputs(bool val)
