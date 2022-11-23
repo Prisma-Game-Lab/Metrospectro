@@ -89,6 +89,7 @@ public class ServerGameNetPortal : Singleton<ServerGameNetPortal>
 
     public void EndGame()
     {
+        if (!NetworkManager.Singleton.IsServer) { return; }
         _gameInProgress = false;
 
         NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);

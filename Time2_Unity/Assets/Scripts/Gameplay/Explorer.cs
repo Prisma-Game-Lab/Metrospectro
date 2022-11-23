@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Unity.Netcode;
+using Unity.Netcode;using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +12,9 @@ public class Explorer : NetworkBehaviour
     [SerializeField] private float movementDuration = .35f;
     
     private readonly Lock _lock = new Lock();
+    
+    public delegate void NotifyOnRotate(Direction dir);
+    public event NotifyOnRotate OnExplorerRotate;    
     
     public void HandleMovementInput(InputAction.CallbackContext context)
     {
@@ -58,6 +61,8 @@ public class Explorer : NetworkBehaviour
     
         var inputValue = context.ReadValue<float>();
         
+        OnExplorerRotate?.Invoke(inputValue > 0? Direction.Right : Direction.Left);
+
         if (invertedInput)
         {
             inputValue = -1 * inputValue;
@@ -139,3 +144,5 @@ public class Explorer : NetworkBehaviour
         _lock.RemoveLock();
     }
 }
+
+public enum Direction {Left, Right};
