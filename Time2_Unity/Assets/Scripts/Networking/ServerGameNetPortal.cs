@@ -15,6 +15,7 @@ public class ServerGameNetPortal : Singleton<ServerGameNetPortal>
     private Dictionary<ulong, string> _clientIdToGuid;
     private Dictionary<ulong, int> _clientSceneMap;
     private bool _gameInProgress;
+    public Path path;
 
     private const int MaxConnectionPayload = 1024;
 
@@ -84,7 +85,12 @@ public class ServerGameNetPortal : Singleton<ServerGameNetPortal>
     {
         _gameInProgress = true;
 
-        NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);
+        LoadScene("Game");
+    }
+    
+    public void LoadScene(string scene)
+    {
+        NetworkManager.Singleton.SceneManager.LoadScene(scene, LoadSceneMode.Single);
     }
 
     public void EndGame()
@@ -92,7 +98,7 @@ public class ServerGameNetPortal : Singleton<ServerGameNetPortal>
         if (!NetworkManager.Singleton.IsServer) { return; }
         _gameInProgress = false;
 
-        NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
+        LoadScene("Lobby");
     }
 
     private void HandleNetworkReadied()
@@ -255,3 +261,5 @@ public class ServerGameNetPortal : Singleton<ServerGameNetPortal>
             clientId);
     }
 }
+
+public enum Path { A, B }
