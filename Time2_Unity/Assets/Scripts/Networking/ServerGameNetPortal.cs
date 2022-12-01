@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = System.Random;
 
 public class ServerGameNetPortal : Singleton<ServerGameNetPortal>
 {
@@ -85,7 +85,10 @@ public class ServerGameNetPortal : Singleton<ServerGameNetPortal>
     {
         _gameInProgress = true;
 
-        LoadScene("Game");
+        var rnd = new Random();
+        path = (Path) rnd.Next(0, 2);
+
+        LoadScene(path == Path.A ? "Sala1a" : "Sala1b");
     }
     
     public void LoadScene(string scene)

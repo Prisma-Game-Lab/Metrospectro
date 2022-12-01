@@ -17,9 +17,7 @@ public class TransitionPortal : NetworkBehaviour
     [ServerRpc]
     private void RequestAdvanceSceneServerRpc()
     {
-        if (ServerGameNetPortal.Instance.path == Path.A)
-            ServerGameNetPortal.Instance.LoadScene(targetSceneA);
-        else
-            ServerGameNetPortal.Instance.LoadScene(targetSceneB);
+        ServerGameNetPortal.Instance.LoadScene(
+            ServerGameNetPortal.Instance.path == Path.A ? targetSceneA : targetSceneB);
     }
 }
