@@ -222,7 +222,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 948969849490517739}
         m_TargetAssemblyTypeName: Storyteller, Assembly-CSharp
-        m_MethodName: HandleInput
+        m_MethodName: HandleMapInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -234,6 +234,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b67a70d2-275a-4e5a-89ab-963db1f26cff
     m_ActionName: Storyteller/ChangeVision[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 948969849490517739}
+        m_TargetAssemblyTypeName: Storyteller, Assembly-CSharp
+        m_MethodName: HandleCameraInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2cecd2f7-072a-4f99-a8f3-6ef7972e4114
+    m_ActionName: Storyteller/CameraInput[/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Storyteller

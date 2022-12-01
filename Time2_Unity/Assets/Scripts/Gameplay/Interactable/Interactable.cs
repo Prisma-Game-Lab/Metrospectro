@@ -28,7 +28,7 @@ public class Interactable : NetworkBehaviour
     [ClientRpc]
     private void HandleInteractionClientRPC()
     {
-        
+        AudioManager.Instance.PlayClick();
         if (!_interacted)
         {
             _interaction.Interact();

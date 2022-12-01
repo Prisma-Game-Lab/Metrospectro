@@ -32,11 +32,21 @@ public class Explorer : NetworkBehaviour
         {
             moveDirection = new Vector2(-1 * moveDirection.x, -1 * moveDirection.y);
         }
+
+
         
         var targetX = Mathf.FloorToInt(currentPosition.x + moveDirection.x);
         var targetZ = Mathf.FloorToInt(currentPosition.z + moveDirection.y);
+
+        var cellBlocked = MapGrid.Instance.IsCellBlocked(targetX, targetZ);
+
+        if (!cellBlocked) AudioManager.Instance.PlayStep(moveDirection);
+        else if (!_lock.IsLocked())
+        {
+            AudioManager.Instance.PlayCollide(moveDirection);
+        }
         
-        if (!_lock.IsLocked() && !MapGrid.Instance.IsCellBlocked(targetX, targetZ))
+        if (!cellBlocked && !_lock.IsLocked())
         {
             MovePlayerServerRPC(moveDirection.x, moveDirection.y);
         }

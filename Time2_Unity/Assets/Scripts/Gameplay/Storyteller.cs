@@ -43,6 +43,8 @@ public class Storyteller : NetworkBehaviour
         if (!context.performed || !IsOwner || _lock.IsLocked()) return;
         var isMapEnabled = mapCanvas.activeSelf;
         if (!isMapEnabled) return;
+
+        isMapEnabled = false;
         mapCanvas.SetActive(false);
         batteryCanvas.SetActive(true);
         _battery.TurnOn();
@@ -53,6 +55,8 @@ public class Storyteller : NetworkBehaviour
         if (!context.performed || !IsOwner || _lock.IsLocked()) return;
         var isMapEnabled = mapCanvas.activeSelf;
         if (isMapEnabled) return;
+
+        isMapEnabled = true;
         mapCanvas.SetActive(true);
         batteryCanvas.SetActive(false);
         _battery.TurnOff();
