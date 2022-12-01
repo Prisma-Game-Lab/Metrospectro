@@ -5,6 +5,8 @@ using UnityEngine;
 public class SpawnerSetup : NetworkBehaviour
 {
     [SerializeField] private GameObject explorerPrefab;
+    [SerializeField] private Transform spawnA;
+    [SerializeField] private Transform spawnB;
     private NetworkObject _spawnedExplorer;
     
     [SerializeField] private GameObject storytellerPrefab;
@@ -20,7 +22,10 @@ public class SpawnerSetup : NetworkBehaviour
     {
         if (IsServer && explorerPrefab != null && storytellerPrefab != null)
         {
-            var explorerInstance = Instantiate(explorerPrefab);
+            var explorerInstance = ServerGameNetPortal.Instance.path == Path.A ? 
+                Instantiate(explorerPrefab, spawnA.position, spawnA.rotation) : 
+                Instantiate(explorerPrefab,spawnB.position, spawnB.rotation);
+
             var storytellerInstance = Instantiate(storytellerPrefab);
 
             var exp = ServerGameNetPortal.Instance.GetPlayerByRole(Role.Explorer);

@@ -6,9 +6,18 @@
             "id": "13de2d09-1525-4da2-8797-9009dc6cac58",
             "actions": [
                 {
-                    "name": "ChangeVision",
+                    "name": "MapInput",
                     "type": "Button",
                     "id": "b67a70d2-275a-4e5a-89ab-963db1f26cff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CameraInput",
+                    "type": "Button",
+                    "id": "2cecd2f7-072a-4f99-a8f3-6ef7972e4114",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -19,11 +28,22 @@
                 {
                     "name": "",
                     "id": "8a7ca82d-5f95-4c41-a1af-540fe2772eaf",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChangeVision",
+                    "action": "MapInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b74cce8-b99a-4c21-b17d-f171dacc3b2b",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraInput",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

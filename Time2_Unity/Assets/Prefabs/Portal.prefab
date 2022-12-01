@@ -384,6 +384,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSceneA: 
   targetSceneB: 
+  fadeDuration: 2
+  fadeObject: {fileID: 2775648578677456004, guid: 7f069154259915e4c871d4613e492494,
+    type: 3}
 --- !u!114 &5436213699898748058
 MonoBehaviour:
   m_ObjectHideFlags: 0

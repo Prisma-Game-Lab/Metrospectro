@@ -5,17 +5,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class EndCondition : MonoBehaviour
-{
-    [SerializeField] private float fadeDuration = 1;
-    [SerializeField] private GameObject fadeObject;
+{ 
+    [SerializeField] private float fadeDuration = 1; 
+    [SerializeField] private GameObject fadeObject; 
     private Image _img;
-
-    private void Awake()
-    {
-        var temp = Instantiate(fadeObject);
-        _img = temp.GetComponentInChildren<Image>();
-        _img.color = new Color(0, 0, 0, 0);
-    }
+     
+     private void Awake()
+     {
+         var temp = Instantiate(fadeObject);
+         _img = temp.GetComponentInChildren<Image>();
+         _img.color = new Color(0, 0, 0, 0);
+     }
 
     private  void OnTriggerEnter(Collider other)
     {

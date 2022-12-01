@@ -38,15 +38,24 @@ public class Storyteller : NetworkBehaviour
         mapCanvas.SetActive(true);
     }
 
-    public void HandleInput(InputAction.CallbackContext context)
+    public void HandleCameraInput(InputAction.CallbackContext context)
     {
         if (!context.performed || !IsOwner || _lock.IsLocked()) return;
-
         var isMapEnabled = mapCanvas.activeSelf;
-        mapCanvas.SetActive(!isMapEnabled);
-        batteryCanvas.SetActive(isMapEnabled);
-        _battery.SwitchPower();
+        if (!isMapEnabled) return;
+        mapCanvas.SetActive(false);
+        batteryCanvas.SetActive(true);
+        _battery.TurnOn();
+    }
 
+    public void HandleMapInput(InputAction.CallbackContext context)
+    {
+        if (!context.performed || !IsOwner || _lock.IsLocked()) return;
+        var isMapEnabled = mapCanvas.activeSelf;
+        if (isMapEnabled) return;
+        mapCanvas.SetActive(true);
+        batteryCanvas.SetActive(false);
+        _battery.TurnOff();
     }
 
     private void OnEnable()
@@ -65,6 +74,7 @@ public class Storyteller : NetworkBehaviour
     {
         _lock.AddLock();
         mapCanvas.SetActive(true);
+        batteryCanvas.SetActive(false);
     }
     
     private void OnChangeTime(float currentPercentage)

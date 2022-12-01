@@ -31,24 +31,27 @@ public class Battery : MonoBehaviour
         _isEnabled = false;
         OnEndTime?.Invoke();
     }
-
-    public void SwitchPower()
+    
+    public void TurnOn()
     {
-        if (_isEnabled)
-        {
-            StopAllCoroutines();
-        }
-        else
-        {
-            StartCoroutine(BatteryCounter());
-        }
-        _isEnabled = !_isEnabled;
+        if(_isEnabled) return;
+        
+        _isEnabled = true;
+        StartCoroutine(BatteryCounter());
+    }
+
+    public void TurnOff()
+    {
+        if (!_isEnabled) return;
+
+        _isEnabled = false;
+        StopAllCoroutines();
     }
 
     public void Recharge(int amount)
     {
         var temp = _currentTime + amount;
         _currentTime = Math.Max(temp, maxTime);
-        if(!_isEnabled) SwitchPower();
+        TurnOn();
     }
 }
