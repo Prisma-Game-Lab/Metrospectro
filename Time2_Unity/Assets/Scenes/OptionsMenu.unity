@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 128695680}
   - component: {fileID: 128695679}
   m_Layer: 5
-  m_Name: Exit
+  m_Name: ControllsSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +276,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 405627371}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ExitGame
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: 428499288}
   - component: {fileID: 428499287}
   m_Layer: 5
-  m_Name: Exit (1)
+  m_Name: ImageSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -668,7 +668,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 405627371}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ExitGame
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -844,7 +844,7 @@ GameObject:
   - component: {fileID: 454537495}
   - component: {fileID: 454537494}
   m_Layer: 5
-  m_Name: Exit
+  m_Name: GameSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -917,7 +917,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 405627371}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ExitGame
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1576,7 +1576,7 @@ GameObject:
   - component: {fileID: 1790287629}
   - component: {fileID: 1790287628}
   m_Layer: 5
-  m_Name: Exit
+  m_Name: SoundSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1649,7 +1649,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 405627371}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ExitGame
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
