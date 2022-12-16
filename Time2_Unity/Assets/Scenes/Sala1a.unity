@@ -131,7 +131,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34800
+  m_Name: pb_Mesh31324
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2893,7 +2893,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34818
+  m_Name: pb_Mesh31342
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3067,7 +3067,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1250
+  m_Name: pb_Mesh-1246
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5483,20 +5483,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 620306195166940534, guid: 86ef4a32ea8360046a465353ac7d8f4d,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8441205335152669105}
-    - target: {fileID: 620306195166940534, guid: 86ef4a32ea8360046a465353ac7d8f4d,
-        type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HandlePauseInput
-      objectReference: {fileID: 0}
-    - target: {fileID: 3328920168200443503, guid: 86ef4a32ea8360046a465353ac7d8f4d,
+    - target: {fileID: 3310094276289922219, guid: 86ef4a32ea8360046a465353ac7d8f4d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4361608982650839542, guid: 86ef4a32ea8360046a465353ac7d8f4d,
         type: 3}
@@ -5506,7 +5496,7 @@ PrefabInstance:
     - target: {fileID: 4958948031274468021, guid: 86ef4a32ea8360046a465353ac7d8f4d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5893290847705549655, guid: 86ef4a32ea8360046a465353ac7d8f4d,
         type: 3}
@@ -5566,51 +5556,7 @@ PrefabInstance:
     - target: {fileID: 7900156496368879997, guid: 86ef4a32ea8360046a465353ac7d8f4d,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 4200001684
+      value: 1383148491
       objectReference: {fileID: 0}
-    - target: {fileID: 7962213492696237164, guid: 86ef4a32ea8360046a465353ac7d8f4d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8441205335152669105}
-    - target: {fileID: 7962213492696237164, guid: 86ef4a32ea8360046a465353ac7d8f4d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadMenuServerRPC
-      objectReference: {fileID: 0}
-    - target: {fileID: 8058229597798262738, guid: 86ef4a32ea8360046a465353ac7d8f4d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8441205335152669105}
-    - target: {fileID: 8058229597798262738, guid: 86ef4a32ea8360046a465353ac7d8f4d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RequestResumeServerRPC
-      objectReference: {fileID: 0}
-    - target: {fileID: 8441205335152669105, guid: 86ef4a32ea8360046a465353ac7d8f4d,
-        type: 3}
-      propertyPath: pauseMenuUI
-      value: 
-      objectReference: {fileID: 8441205335152669104}
-    m_RemovedComponents:
-    - {fileID: 8441205335152669105, guid: 86ef4a32ea8360046a465353ac7d8f4d, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86ef4a32ea8360046a465353ac7d8f4d, type: 3}
---- !u!1 &8441205335152669104 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3328920168200443503, guid: 86ef4a32ea8360046a465353ac7d8f4d,
-    type: 3}
-  m_PrefabInstance: {fileID: 8441205335152669103}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8441205335152669105 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8926990420870627476, guid: 86ef4a32ea8360046a465353ac7d8f4d,
-    type: 3}
-  m_PrefabInstance: {fileID: 8441205335152669103}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe31f655262feda4e8d0ecf1638d658d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
