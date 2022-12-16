@@ -305,7 +305,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1246
+  m_Name: pb_Mesh-62536
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -478,7 +478,7 @@ PrefabInstance:
     - target: {fileID: 3740625199764988282, guid: 6e5048e0e3923fe41b0786783265b00b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3740625199764988282, guid: 6e5048e0e3923fe41b0786783265b00b,
         type: 3}
@@ -488,7 +488,7 @@ PrefabInstance:
     - target: {fileID: 3740625199764988282, guid: 6e5048e0e3923fe41b0786783265b00b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3740625199764988282, guid: 6e5048e0e3923fe41b0786783265b00b,
         type: 3}
@@ -549,6 +549,16 @@ PrefabInstance:
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3463294831
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436213699898748059, guid: 6e5048e0e3923fe41b0786783265b00b,
+        type: 3}
+      propertyPath: targetSceneA
+      value: Sala2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436213699898748059, guid: 6e5048e0e3923fe41b0786783265b00b,
+        type: 3}
+      propertyPath: targetSceneB
+      value: Sala3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e5048e0e3923fe41b0786783265b00b, type: 3}
@@ -6532,7 +6542,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31426
+  m_Name: pb_Mesh35882
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6715,7 +6725,7 @@ PrefabInstance:
     - target: {fileID: 1308495859927521654, guid: 092b236047ef79e46b87b53ee61b01f4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1308495859927521654, guid: 092b236047ef79e46b87b53ee61b01f4,
         type: 3}
