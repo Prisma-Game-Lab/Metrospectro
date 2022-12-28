@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.6
   m_LinearFogStart: -12
   m_LinearFogEnd: 1.6
-  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
+  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0
@@ -3088,7 +3088,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-9576
+  m_Name: pb_Mesh-15462
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3337,6 +3337,16 @@ PrefabInstance:
         type: 3}
       propertyPath: targetSceneB
       value: Sala3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509511111101261010, guid: 6e5048e0e3923fe41b0786783265b00b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509511111101261010, guid: 6e5048e0e3923fe41b0786783265b00b,
+        type: 3}
+      propertyPath: m_SelectedEditorRenderState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e5048e0e3923fe41b0786783265b00b, type: 3}
@@ -4536,17 +4546,9 @@ MonoBehaviour:
   m_Mesh: {fileID: 177002064}
   m_VersionIndex: 52
   m_IsSelectable: 1
-  m_SelectedFaces: 15000000
-  m_SelectedEdges:
-  - a: 84
-    b: 85
-  - a: 86
-    b: 84
-  - a: 85
-    b: 87
-  - a: 87
-    b: 86
-  m_SelectedVertices: 54000000550000005600000057000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!4 &777489605
 Transform:
   m_ObjectHideFlags: 0
@@ -4617,7 +4619,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31362
+  m_Name: pb_Mesh34792
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5277,6 +5279,16 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7859588517212818328, guid: 092b236047ef79e46b87b53ee61b01f4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859588517212818328, guid: 092b236047ef79e46b87b53ee61b01f4,
+        type: 3}
+      propertyPath: m_SelectedEditorRenderState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 092b236047ef79e46b87b53ee61b01f4, type: 3}
 --- !u!1 &2088517298 stripped
@@ -5399,7 +5411,7 @@ PrefabInstance:
     - target: {fileID: 6225595326758033950, guid: bc9e2dc96621061489b52552121af498,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6225595326758033950, guid: bc9e2dc96621061489b52552121af498,
         type: 3}
@@ -5409,12 +5421,12 @@ PrefabInstance:
     - target: {fileID: 6225595326758033950, guid: bc9e2dc96621061489b52552121af498,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6834167684481578374, guid: bc9e2dc96621061489b52552121af498,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6834167684481578374, guid: bc9e2dc96621061489b52552121af498,
         type: 3}
@@ -5424,7 +5436,7 @@ PrefabInstance:
     - target: {fileID: 6834167684481578374, guid: bc9e2dc96621061489b52552121af498,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7681224848906229448, guid: bc9e2dc96621061489b52552121af498,
         type: 3}

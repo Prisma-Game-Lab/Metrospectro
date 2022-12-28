@@ -9,12 +9,27 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 3dd55e9845c50dd42a68e1db46ffec6f
   - enabled: 1
+    path: Assets/Scenes/OptionsMenu.unity
+    guid: 398e7965a0641f34e82416113dd9e455
+  - enabled: 1
     path: Assets/Scenes/Lobby.unity
     guid: 4fc74b543e4c10e42b63d9c805902e48
+  - enabled: 1
+    path: Assets/Scenes/Sala1a.unity
+    guid: 26369d87d8fbbe24d81cbfa4e1e979cb
+  - enabled: 1
+    path: Assets/Scenes/Sala1b.unity
+    guid: 222a371facf0dc54687c164b8554b0b4
   - enabled: 1
     path: Assets/Scenes/Sala2.unity
     guid: a6c53052210415b4b8c6bff86e7aad4d
   - enabled: 1
-    path: Assets/Scenes/Sala1a.unity
-    guid: 26369d87d8fbbe24d81cbfa4e1e979cb
+    path: Assets/Scenes/Sala3.unity
+    guid: 388c03ee801db034299101e174577ffb
+  - enabled: 1
+    path: "Assets/Scenes/Sa\xEDdaA.unity"
+    guid: 355b070ac11932040a206a67f1a4815b
+  - enabled: 1
+    path: "Assets/Scenes/Sa\xEDdaB.unity"
+    guid: d5f931538695cd44990e70bf65d5bd90
   m_configObjects: {}
