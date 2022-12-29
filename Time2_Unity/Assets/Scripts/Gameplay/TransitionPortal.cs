@@ -26,7 +26,7 @@ public class TransitionPortal : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    [ServerRpc (RequireOwnership = false)]
     private void RequestAdvanceSceneServerRpc()
     {
         var target = ServerGameNetPortal.Instance.path == Path.A ? targetSceneA : targetSceneB;

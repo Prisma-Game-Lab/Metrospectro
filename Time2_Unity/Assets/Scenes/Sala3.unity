@@ -474,7 +474,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh50212
+  m_Name: pb_Mesh72024
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -638,7 +638,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh50186
+  m_Name: pb_Mesh76064
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -891,7 +891,7 @@ PrefabInstance:
     - target: {fileID: 5436213699898748059, guid: 6e5048e0e3923fe41b0786783265b00b,
         type: 3}
       propertyPath: targetSceneB
-      value: Plataforma
+      value: Sala2
       objectReference: {fileID: 0}
     - target: {fileID: 7509511111101261010, guid: 6e5048e0e3923fe41b0786783265b00b,
         type: 3}
@@ -1222,7 +1222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToMove: {fileID: 1058937338}
   whereToMove: {x: 12, y: 0, z: 5}
-  duration: 0
+  duration: 2
 --- !u!1 &777489600
 GameObject:
   m_ObjectHideFlags: 0
