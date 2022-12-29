@@ -7,6 +7,7 @@ public class EnemyOne : MonoBehaviour
         var isExp = exp.IsOwner;
         if (!isExp)
         {
+            
             var r = GetComponent<Renderer>();
 
             if (r != null)

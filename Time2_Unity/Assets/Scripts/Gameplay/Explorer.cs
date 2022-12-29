@@ -19,13 +19,24 @@ public class Explorer : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+        RequestCheckEnemiesServerRpc();
+    }
+
+    [ServerRpc (RequireOwnership = false)]
+    private void RequestCheckEnemiesServerRpc()
+    {
+        CheckEnemiesClientRpc();
+    }
+
+    [ClientRpc]
+    private void CheckEnemiesClientRpc()
+    {
         var inimigos = FindObjectsOfType<EnemyOne>();
         foreach (var inimigo in inimigos)
         {
             inimigo.SetUp(this);
         }
     }
-    
     public void HandleMovementInput(InputAction.CallbackContext context)
     {
         if (!IsOwner || !context.performed) return;

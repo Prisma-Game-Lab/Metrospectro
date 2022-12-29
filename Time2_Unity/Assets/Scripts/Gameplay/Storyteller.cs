@@ -1,4 +1,5 @@
-﻿using Unity.Netcode;
+﻿using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -12,9 +13,12 @@ public class Storyteller : NetworkBehaviour
 
     private Battery _battery;
     [SerializeField] private GameObject mapCanvas;
+    [SerializeField] private Image mapImage;
+    [SerializeField] private List<Sprite> mapSprites;
     [SerializeField] private GameObject batteryCanvas;
     [SerializeField] private Image batteryImage;
     [SerializeField] private Sprite[] batterySprites;
+    private int _currentSprite;
 
     public override void OnNetworkSpawn()
     {
@@ -36,13 +40,17 @@ public class Storyteller : NetworkBehaviour
         _battery = GetComponent<Battery>();
         batteryCanvas.SetActive(false);
         mapCanvas.SetActive(true);
+        mapImage.sprite = mapSprites[_currentSprite++];
     }
 
     public void HandleCameraInput(InputAction.CallbackContext context)
     {
         if (!context.performed || !IsOwner || _lock.IsLocked()) return;
         var isMapEnabled = mapCanvas.activeSelf;
-        if (!isMapEnabled) return;
+        if (!isMapEnabled)
+        {
+            return;
+        }
 
         isMapEnabled = false;
         mapCanvas.SetActive(false);
@@ -52,10 +60,16 @@ public class Storyteller : NetworkBehaviour
 
     public void HandleMapInput(InputAction.CallbackContext context)
     {
-        if (!context.performed || !IsOwner || _lock.IsLocked()) return;
+        if (!context.performed || !IsOwner) return;
         var isMapEnabled = mapCanvas.activeSelf;
-        if (isMapEnabled) return;
+        if (isMapEnabled)
+        {
+            mapImage.sprite = mapSprites[_currentSprite++ % mapSprites.Count];
+            return;
+        }
 
+        if (_lock.IsLocked()) return;
+        
         isMapEnabled = true;
         mapCanvas.SetActive(true);
         batteryCanvas.SetActive(false);

@@ -168,6 +168,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lights: {fileID: 2446741058616095475}
   mapCanvas: {fileID: 7421247805789495720}
+  mapImage: {fileID: 5549233746509409666}
+  mapSprites:
+  - {fileID: 21300000, guid: f3b0cb8b40c2fb6498e660a408426a20, type: 3}
+  - {fileID: 21300000, guid: 4e517e5b0747cf64b8c75a6282893d37, type: 3}
+  - {fileID: 21300000, guid: 29a04ecb152f7bf47aa81ae9937bde33, type: 3}
+  - {fileID: 21300000, guid: 447ba42cfbe53244ca99facfd5c225da, type: 3}
+  - {fileID: 21300000, guid: 30a5c8b466709994dbc69ac2c54c0bee, type: 3}
+  - {fileID: 21300000, guid: 993973c9eacf34d4b8209abc3ef94a88, type: 3}
+  - {fileID: 21300000, guid: 8551ed92c224d5442aa115f45c4c5cf3, type: 3}
   batteryCanvas: {fileID: 8594571067446986274}
   batteryImage: {fileID: 3466983936621366878}
   batterySprites:
@@ -614,7 +623,7 @@ GameObject:
   - component: {fileID: 5163437750975013047}
   - component: {fileID: 5549233746509409666}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
