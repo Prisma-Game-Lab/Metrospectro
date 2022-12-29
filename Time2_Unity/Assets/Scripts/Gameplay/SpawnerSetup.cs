@@ -11,12 +11,6 @@ public class SpawnerSetup : NetworkBehaviour
     
     [SerializeField] private GameObject storytellerPrefab;
     private NetworkObject _spawnedStoryteller;
-    
-    public delegate void NotifyExpSpawn();
-    public event NotifyExpSpawn OnExplorerSpawn;
-    
-    public delegate void NotifyStoSpawn();
-    public event NotifyStoSpawn OnStorytellerSpawn;
 
     public override void OnNetworkSpawn()
     {
@@ -38,7 +32,5 @@ public class SpawnerSetup : NetworkBehaviour
             _spawnedStoryteller = storytellerInstance.GetComponent<NetworkObject>();
             _spawnedStoryteller.SpawnWithOwnership(str.Value.ClientId, destroyWithScene: true);
         }
-        OnExplorerSpawn?.Invoke();
-        OnStorytellerSpawn?.Invoke();
     }
 }

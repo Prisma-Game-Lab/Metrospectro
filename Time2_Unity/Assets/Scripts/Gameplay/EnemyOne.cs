@@ -1,20 +1,10 @@
-using System;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.Netcode;
 using UnityEngine;
 
 public class EnemyOne : MonoBehaviour
 {
-    private SpawnerSetup _spawner;
-
-    private void Awake()
+    public void SetUp(Explorer exp)
     {
-        _spawner = FindObjectOfType<SpawnerSetup>();
-    }
-
-    private void SetUp()
-    {
-        var isExp = FindObjectOfType<Explorer>().IsOwner;
+        var isExp = exp.IsOwner;
         if (!isExp)
         {
             var r = GetComponent<Renderer>();
@@ -26,13 +16,4 @@ public class EnemyOne : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        _spawner.OnExplorerSpawn += SetUp;
-    }
-    
-    private void OnDisable()
-    {
-        _spawner.OnExplorerSpawn -= SetUp;
-    }
 }

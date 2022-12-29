@@ -13,7 +13,18 @@ public class Explorer : NetworkBehaviour
     private readonly Lock _lock = new Lock();
     
     public delegate void NotifyOnRotate(Direction dir);
-    public event NotifyOnRotate OnExplorerRotate;    
+    public event NotifyOnRotate OnExplorerRotate;
+    
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        var inimigos = FindObjectsOfType<EnemyOne>();
+        foreach (var inimigo in inimigos)
+        {
+            inimigo.SetUp(this);
+        }
+    }
     
     public void HandleMovementInput(InputAction.CallbackContext context)
     {
